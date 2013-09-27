@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="gdg.youtube"
+      version="0.1.0">
+    <name>YouTube</name>
+    <description>Sample Android YouTube Player API Plugin</description>
+    <license>Apache 2.0 License</license>
+    <keywords>youtube,player,android,phonegap</keywords>
+
+
+    <js-module src="www/youtube.js" name="YouTube">
+        <clobbers target="window.youtube" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="YouTube">
+                <param name="android-package" value="gdg.youtube.YouTube"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/YouTube.java" target-dir="src/gdg/youtube" />      
+     </platform>          
+</plugin>

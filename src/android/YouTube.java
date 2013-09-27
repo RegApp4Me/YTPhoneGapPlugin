@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2013 Matias Molinas.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package gdg.youtube;
  
 import org.apache.cordova.CallbackContext;
@@ -87,7 +102,7 @@ public class YouTube extends CordovaPlugin {
 		boolean success = false;
         try {
             if (ACTION_PLAY_VIDEO.equals(action)) { 
-                doCanResolveOpenPlaylistIntent(args);
+                doPlayVideo(args);
                 callbackContext.success();
                 return true;
             }
@@ -101,7 +116,7 @@ public class YouTube extends CordovaPlugin {
 		return success;
     }
 	
-	private void doCanResolveOpenPlaylistIntent(JSONArray args) {
+	private void doPlayVideo(JSONArray args) {
 		JSONObject arg_object = args.getJSONObject(0);
 		String videoid = arg_object.getString("videoid");
 		Intent youtubeIntent = YouTubeStandalonePlayer.createVideoIntent(this.cordova.getActivity(), "YOUR_API_KEY", videoid);

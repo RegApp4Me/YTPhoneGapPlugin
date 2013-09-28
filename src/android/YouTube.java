@@ -119,7 +119,7 @@ public class YouTube extends CordovaPlugin {
 	private void doPlayVideo(JSONArray args) {
 		JSONObject arg_object = args.getJSONObject(0);
 		String videoid = arg_object.getString("videoid");
-		Intent youtubeIntent = YouTubeStandalonePlayer.createVideoIntent(this.cordova.getActivity(), "YOUR_API_KEY", videoid);
+		Intent youtubeIntent = YouTubeStandalonePlayer.createVideoIntent(this.cordova.getActivity(), YOUTUBE_API_KEY, videoid);
 		this.cordova.startActivityForResult(this, youtubeIntent, 0);
 	}
 }

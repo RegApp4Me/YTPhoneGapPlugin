@@ -31,7 +31,7 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 public class YouTube extends CordovaPlugin {
 
 	// API key instructions https://developers.google.com/youtube/android/player/register
-	public static final String YOUTUBE_API_KEY = "YOUR_API_KEY";
+	public static final String YOUTUBE_API_KEY = "AIzaSyBIyLML69GL2s1R8K-sLkYoFyEDhtgkciE";
 
 	// Checks if the YouTube application installed on the user's device supports the open playlist intent.
 	// https://developers.google.com/youtube/android/player/reference/com/google/android/youtube/player/YouTubeIntents#canResolveOpenPlaylistIntent(android.content.Context)
@@ -55,7 +55,7 @@ public class YouTube extends CordovaPlugin {
 	
 	// Checks if the YouTube application installed on the user's device supports the open user intent.
 	// https://developers.google.com/youtube/android/player/reference/com/google/android/youtube/player/YouTubeIntents#canResolveUserIntent(android.content.Context)
-    public static final String ACTION_CAN_RESOLVE_OPEN_PLAYLIST = "canResolveUser";
+    public static final String ACTION_CAN_RESOLVE_USER = "canResolveUser";
 	
 	// Creates an Intent that, when resolved, will open the given playlist in the YouTube application.
 	// https://developers.google.com/youtube/android/player/reference/com/google/android/youtube/player/YouTubeIntents#createOpenPlaylistIntent(android.content.Context, java.lang.String)
@@ -71,7 +71,7 @@ public class YouTube extends CordovaPlugin {
 	
 	// Creates an Intent that, when resolved, will start playing the video specified by videoId, within the YouTube application.
 	// https://developers.google.com/youtube/android/player/reference/com/google/android/youtube/player/YouTubeIntents#createPlayVideoIntentWithOptions(android.content.Context, java.lang.String, boolean, boolean)
-    public static final String ACTION_PLAY_VIDEO = "playVideoWithOptions";
+    public static final String ACTION_PLAY_VIDEO_WITH_OPTIONS = "playVideoWithOptions";
 	
 	// Creates an Intent that, when resolved, will open the search results for the given query in the YouTube application.
 	// https://developers.google.com/youtube/android/player/reference/com/google/android/youtube/player/YouTubeIntents#createSearchIntent(android.content.Context, java.lang.String)
@@ -104,19 +104,19 @@ public class YouTube extends CordovaPlugin {
             if (ACTION_PLAY_VIDEO.equals(action)) { 
                 doPlayVideo(args);
                 callbackContext.success();
-                return true;
+                success = true;
             }
             callbackContext.error("Invalid action");
-            return false;
+            success =  false;
         } catch(Exception e) {
             System.err.println("Exception: " + e.getMessage());
             callbackContext.error(e.getMessage());
-            return false;
+            success =  false;
         }
 		return success;
     }
 	
-	private void doPlayVideo(JSONArray args) {
+	private void doPlayVideo(JSONArray args) throws JSONException {
 		JSONObject arg_object = args.getJSONObject(0);
 		String videoid = arg_object.getString("videoid");
 		Intent youtubeIntent = YouTubeStandalonePlayer.createVideoIntent(this.cordova.getActivity(), YOUTUBE_API_KEY, videoid);
